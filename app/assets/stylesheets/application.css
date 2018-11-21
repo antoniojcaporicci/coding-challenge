@@ -13,3 +13,33 @@
  *= require_tree .
  *= require_self
  */
+.career_header {
+    background: #666666;
+    color: #FFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 44px;
+}
+
+#main_title {
+    font-size: 24px; 
+}
+
+#new_post_btn {
+    height: 24px;
+    width: 84px;
+    background: #ddd;
+    margin: 5px;
+    border-radius: 25px;
+}
+
+#new_post_btn:hover {
+    background: #e768d5;
+}
+
+#new_post_btn > a {
+    color: #434645;
+    text-decoration: none;
+}
