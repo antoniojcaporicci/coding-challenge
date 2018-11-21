@@ -1,7 +1,15 @@
 class PostsController < ApplicationController
   def index
     # Return all `Post`
-    @posts = Post.all
+    if params[:search]
+      @posts = Post.search(params[:search]).order("created_at DESC")
+    else
+      @posts = Post.all.order('created_at DESC')
+    end
+  end
+
+  def show
+    @post = Post.find(params[:id])
   end
 
   def new
@@ -11,23 +19,23 @@ class PostsController < ApplicationController
 
   def create
     # Add a new `Post` to the database
-    @post = Post.new
-    if @post.save(post_params)
-      flash[:notice] = "Successfully created post!"
-      redirect_to post_path(@post)
-    else
-      flash[:alert] = "Error creating new post!"
-      render :new
-    end
+    @post = Post.new(post_params)
+  
+    @post.save
+    redirect_to @post
   end
+
 
   def destroy
     # Remove a `Post` from the database
-    if @post.destroy
-      flash[:notice] = "Successfully deleted post!"
-      redirect_to posts_path
-    else
-      flash[:alert] = "Error updating post!"
-    end
+    @post = Post.find(params[:id])
+    @post.destroy
+    
+    redirect_to posts_path
   end
+
+  private
+    def post_params
+      params.require(:post).permit(:title, :body)
+    end
 end

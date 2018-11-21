@@ -1,1 +1,18 @@
 <!-- View for showing all `Post` -->
+
+<%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+<%= submit_tag "Search" %>
+<% end %>
+
+<table>
+    
+  <% @posts.each do |post| %>
+    <tr className="post_table">
+      <td><h1><%= post.title %></h1></td>
+      <td><%= truncate(post.body, :length => 150, separator: '...')  %></td>
+      <td><p>Comments(<%= post.comments.count %>)</p></td>
+      <td><%= link_to 'Show', post_path(post) %></td>
+    </tr>
+  <% end %>
+</table>

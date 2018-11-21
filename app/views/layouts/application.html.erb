@@ -9,6 +9,12 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="career_header">
+      <p id="main_title">Career Plug</p>
+      <div id="new_post_btn">
+        <%= link_to '+ New Post', new_post_path %>
+      </div>
+    </div>
+      <%= yield %>
   </body>
 </html>
